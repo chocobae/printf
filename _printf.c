@@ -6,10 +6,11 @@ void print_buffer(char buffer[], int *buff_ind);
 * _printf - a function that prints formouted output to stdout
 * @format: the string that contains any format specifier
 * Return: returns the number of printed characters
-*/
+ *     */
 int _printf(const char *format, ...)
 {
 	int i, printed = 0, printed_chars = 0;
+
 	int flags, width, precision, size, buff_ind = 0;
 	va_list list;
 	char buffer[BUFF_SIZE];
@@ -49,6 +50,7 @@ int _printf(const char *format, ...)
 
 	va_end(list);
 
+
 	return (printed_chars);
 }
 
@@ -61,5 +63,6 @@ void print_buffer(char buffer[], int *buff_ind)
 {
 	if (*buff_ind > 0)
 		write(1, &buffer[0], *buff_ind);
+
 	*buff_ind = 0;
 }
