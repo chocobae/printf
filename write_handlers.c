@@ -23,23 +23,26 @@ int handle_write_char(char c, char buffer[],
 
 	if (flags & F_ZERO)
 		padd = '0';
-							buffer[i++] = c;
-							buffer[i] = '\0';
-									if (width > 1)
-									{
-										buffer[BUFF_SIZE - 1] = '\0';
-										for (i = 0; i < width - 1; i++)
-											buffer[BUFF_SIZE - i - 2] = padd;
-				if (flags & F_MINUS)
-					return (write(1, &buffer[0], 1) +
-							write(1, &buffer[BUFF_SIZE - i - 1], width - 1));													else
-		
-		return (write(1, &buffer[BUFF_SIZE - i - 1], width - 1) +
-	
-				write(1, &buffer[0], 1));
-									}
 
-								return (write(1, &buffer[0], 1));
+	buffer[i++] = c;
+
+	buffer[i] = '\0';
+
+	if (width > 1)
+		{
+
+			buffer[BUFF_SIZE - 1] = '\0';
+			for (i = 0; i < width - 1; i++)
+				buffer[BUFF_SIZE - i - 2] = padd;
+			if (flags & F_MINUS)
+				return (write(1, &buffer[0], 1) +
+				write(1, &buffer[BUFF_SIZE - i - 1], width - 1));
+			else
+				return (write(1, &buffer[BUFF_SIZE - i - 1], width - 1) +
+				write(1, &buffer[0], 1));
+		}
+
+	return (write(1, &buffer[0], 1));
 }
 
 /************************* WRITE NUMBER *************************/
@@ -183,7 +186,7 @@ int write_unsgnd(int is_negative, int ind,
 
 		buffer[i] = '\0';
 
-	
+
 		if (flags & F_MINUS) /* Asign extra char to left of buffer [buffer>padd]*/
 		{
 			return (write(1, &buffer[ind], length) + write(1, &buffer[0], i));
